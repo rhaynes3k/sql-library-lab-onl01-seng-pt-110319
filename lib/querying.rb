@@ -8,16 +8,25 @@ end
 
 
 def select_value_and_count_of_most_prolific_species
-  "SELECT Characters.species, COUNT(Characters.species) FROM Characters  GROUP BY Characters.species 
-HAVING COUNT(Characters.species)=(SELECT MAX(prolif) FROM (SELECT Characters.species, COUNT(Characters.species) mycount FROM Characters GROUP BY Characters.species));";
+  "SELECT Characters.species, COUNT(Characters.species) AS c
+  FROM Characters GROUP BY Characters.species 
+  HAVING COUNT(Characters.species)=(
+  SELECT MAX(c)
+  FROM (
+  SELECT Characters.species, COUNT(Characters.species) c
+  FROM Characters
+  GROUP BY Characters.species)
+  )";
 end
 
 def select_name_and_series_subgenres_of_authors
-  "SELECT Authors.name, Subgenres.name FROM Authors LEFT OUTER JOIN Subgenres ON Authors.subgenre_id  "
+  "SELECT show.name, sub.name FROM Authors AS show
+  LEFT OUTER JOIN Series AS s ON show.id = s.author_id
+  JOIN Subgenres AS sub ON sub.id = s.subgenre_id ORDER BY show.name";
 end
 
 def select_series_title_with_most_human_characters
-  "Write your SQL query here"
+  "SELECT Series.title FROM Series LEFT OUTER JOIN Characters AS char ON "
 end
 
 def select_character_names_and_number_of_books_they_are_in
