@@ -32,7 +32,7 @@ end
 def select_character_names_and_number_of_books_they_are_in
   "SELECT Characters.name, COUNT(*) AS bkCnt
   FROM Character_books
-  LEFT OUTER JOIN Characters ON Characters_id = Characters_books.character_id 
+  LEFT OUTER JOIN Characters ON Characters.id = Character_books.character_id 
   JOIN Books AS bks ON bks.series_id = ser.id GROUP BY Characters.name 
   HAVING COUNT(bks.title) = (
   SELECT MAX(bkCnt)
