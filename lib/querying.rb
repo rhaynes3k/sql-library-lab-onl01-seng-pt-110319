@@ -34,7 +34,6 @@ def select_character_names_and_number_of_books_they_are_in
   FROM Characters
   LEFT OUTER JOIN Series AS ser ON ser.author_id = Characters.author_id 
   JOIN Books AS bks ON bks.series_id = ser.id GROUP BY Characters.name 
-  binding.pry
   HAVING COUNT(bks.title) = (
   SELECT MAX(bkCnt)
   FROM (
