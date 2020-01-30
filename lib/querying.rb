@@ -38,7 +38,7 @@ def select_character_names_and_number_of_books_they_are_in
   SELECT MAX(bkCnt)
   FROM (
   SELECT char.name, COUNT(bks.title) bkCnt
-  FROM char
+  FROM Characters
   GROUP BY char.name)
   )";
 end
